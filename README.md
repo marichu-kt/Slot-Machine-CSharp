@@ -14,7 +14,7 @@ Este un proyecto implica crear una aplicación de consola para simular una máqu
 
 La práctica consiste en crear una aplicación de consola que simule una máquina tragaperras, permitiendo a los jugadores jugar en un juego de rodillos tradicional.
 
-<p align="center"><img src="/Images/img-2.png" alt="Estructura del programa"></p>
+![Estructura del programa](/Images/img-2.png)
 
 El programa muestra una interfaz de usuario básica con las siguientes opciones:
 
