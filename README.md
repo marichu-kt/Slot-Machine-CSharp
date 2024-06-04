@@ -14,7 +14,7 @@ Este un proyecto implica crear una aplicación de consola para simular una máqu
 
 La práctica consiste en crear una aplicación de consola que simule una máquina tragaperras, permitiendo a los jugadores jugar en un juego de rodillos tradicional.
 
-![Estructura del programa](/Images/img-2.png)
+<p align="center"><img src="/Images/img-2.png" alt="Estructura del programa"></p>
 
 El programa muestra una interfaz de usuario básica con las siguientes opciones:
 
@@ -48,7 +48,7 @@ El siguiente diagrama ilustra la funcionalidad principal del programa, donde:
   - Funciones naranja: métodos públicos (funciones) pertenecientes a una clase central, idealmente llamada SlotMachine.
   - Funciones azules: métodos públicos que deben ser implementados en otras clases (esto no quiere decir que deba existir una clase para cada método...) 
 
-![Flujo del programa](/Images/img-3.png)
+<p align="center"><img src="/Images/img-3.png" alt="Flujo del programa"></p>
 
 Este flujo es una aproximación, no es obligatorio seguir este diagrama de flujo para crear su solución. 
 
