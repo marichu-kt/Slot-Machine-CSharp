@@ -1,0 +1,4 @@
+prize_type;prize_name;symbol_1;symbol_2;symbol_3;advice_1;advice_2;probability
+1;super star;*;*;*;You are the best;;
+2;Three tens;10;10;10;You are going to pass the course;You are not going to pass the course;0.6
+1;The failure;0;0;0;This is not a good prize;;
