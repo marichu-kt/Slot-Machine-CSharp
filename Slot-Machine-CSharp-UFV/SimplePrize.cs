@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Slot_Machine_CSharp_UFV
 {
-    internal class SimplePrize
+    internal class SimplePrize : Prize
     {
     }
 }
