@@ -10,7 +10,8 @@ namespace Slot_Machine_CSharp_UFV
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello Wrold!");
+            SlotMachine slotMachine = new SlotMachine();
+            slotMachine.MenuPrincipal();
             Console.ReadKey();
         }
     }
