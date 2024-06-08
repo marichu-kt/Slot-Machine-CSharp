@@ -66,7 +66,62 @@ namespace Slot_Machine_CSharp_UFV
 
         private void Jugar()
         {
+            try
+            {
+                int[,] rodillos = new int[3, 3];
+                Random rand = new Random();
 
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        rodillos[i, j] = rand.Next(0, 10);
+                    }
+                }
+
+                Console.Clear();
+                Console.WriteLine();
+                Console.WriteLine(" ▄▀▄▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▄▀▄");
+                Console.WriteLine(" █ █      C L E O P A T R A     █ █");
+                Console.WriteLine(" ▀▄▀▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▀▄▀");
+                Console.WriteLine("    ╔════════╦════════╦════════╗");
+
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        Console.Write($"    ║   {rodillos[i, j]}");
+                    }
+                    Console.WriteLine("    ║");
+
+                    if (i < 2)
+                    {
+                        Console.WriteLine("    ╠════════╬════════╬════════╣");
+                    }
+                    else
+                    {
+                        Console.WriteLine("    ╚════════╩════════╩════════╝");
+                    }
+                }
+
+                Console.WriteLine();
+                Console.WriteLine("  ╔═══════════════════════╗");
+                Console.WriteLine("  ║   1. Jugar de nuevo   ║");
+                Console.WriteLine("  ║   2. Salir            ║");
+                Console.WriteLine("  ╚═══════════════════════╝");
+                Console.WriteLine();
+                Console.Write(" Elige una opción: ");
+                int opcion = int.Parse(Console.ReadLine()); 
+
+                if (opcion == 1)
+                {
+                    Jugar();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($" Se produjo un error durante el juego: {ex.Message}");
+            }
         }
 
         private void MostrarPremios()
