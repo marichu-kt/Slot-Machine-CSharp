@@ -8,8 +8,17 @@ namespace Slot_Machine_CSharp_UFV
 {
     internal class SlotMachine
     {
-        private const string claveAdmin = "admin";
-        public void MenuPrincipal()
+        private List<Premio> premios = new List<Premio>();
+        private const string claveAdmin = "admin123";
+        private List<string> frasesMotivacionales = new List<string>
+        {
+            " ¡GIRA Y GANA UNA VIDA MEJOR!",
+            " ¡TRIPLE 7 = SALUD, FELICIDAD Y LIBERTAD!",
+            " ¡CONSIGUE EL BONO DE UNA VIDA MEJOR!",
+            " ¡EL JACKPOT ESTA CERCA!",
+            " ¡LA SLOT MACHINE ESTA CALIENTE!"
+        };        public void MenuPrincipal()
+            
         {
             while (true)
             {
