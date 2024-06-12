@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,8 +18,8 @@ namespace Slot_Machine_CSharp_UFV
             " ¡CONSIGUE EL BONO DE UNA VIDA MEJOR!",
             " ¡EL JACKPOT ESTA CERCA!",
             " ¡LA SLOT MACHINE ESTA CALIENTE!"
-        };        public void MenuPrincipal()
-            
+        };
+        public void MenuPrincipal()
         {
             while (true)
             {
@@ -68,11 +69,6 @@ namespace Slot_Machine_CSharp_UFV
             }
         }
 
-
-
-
-
-
         private void Jugar()
         {
             try
@@ -113,6 +109,8 @@ namespace Slot_Machine_CSharp_UFV
                     }
                 }
 
+                VerificarLineaGanadora(rodillos);
+
                 Console.WriteLine();
                 Console.WriteLine("  ╔═══════════════════════╗");
                 Console.WriteLine("  ║   1. Jugar de nuevo   ║");
@@ -120,7 +118,7 @@ namespace Slot_Machine_CSharp_UFV
                 Console.WriteLine("  ╚═══════════════════════╝");
                 Console.WriteLine();
                 Console.Write(" Elige una opción: ");
-                int opcion = int.Parse(Console.ReadLine()); 
+                int opcion = int.Parse(Console.ReadLine());
 
                 if (opcion == 1)
                 {
@@ -132,6 +130,47 @@ namespace Slot_Machine_CSharp_UFV
                 Console.WriteLine($" Se produjo un error durante el juego: {ex.Message}");
             }
         }
+        private void VerificarLineaGanadora(int[,] rodillos)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                int primerNumero = rodillos[i, 0];
+                bool tresIguales = true;
+
+                for (int j = 1; j < 3; j++)
+                {
+                    if (rodillos[i, j] != primerNumero)
+                    {
+                        tresIguales = false;
+                        break;
+                    }
+                }
+
+                if (tresIguales)
+                {
+                    Console.WriteLine("¡Felicidades! ¡Has ganado!");
+                    return;
+                }
+            }
+            Console.WriteLine("¡Inténtalo de nuevo! ¡Ya casi está!");
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         private void MostrarPremios()
         {
@@ -151,9 +190,6 @@ namespace Slot_Machine_CSharp_UFV
 
 
 
-
-        
-        
         private bool ValidarAdmin()
         {
             try
@@ -170,3 +206,4 @@ namespace Slot_Machine_CSharp_UFV
         }
     }
 }
+
