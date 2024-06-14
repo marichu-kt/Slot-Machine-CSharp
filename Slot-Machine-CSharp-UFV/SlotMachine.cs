@@ -24,7 +24,8 @@ namespace Slot_Machine_CSharp_UFV
             " ¡EL JACKPOT ESTA CERCA!",
             " ¡LA SLOT MACHINE ESTA CALIENTE!"
         };
-        
+
+
         // MENU DE INICIO
         public void MenuPrincipal()
         {
@@ -76,6 +77,8 @@ namespace Slot_Machine_CSharp_UFV
             }
         }
 
+
+        // METODO JUGAR
         private void Jugar()
         {
             try
@@ -138,7 +141,8 @@ namespace Slot_Machine_CSharp_UFV
             }
         }
 
-        
+
+        // COMPROBAMOS SI LA LÍNEA ES GANADORA
         private void VerificarLineaGanadora(int[,] rodillos)
         {
             Random rnd = new Random(); // CREAMOS LA INSTANCIA RANDOM 
@@ -156,7 +160,7 @@ namespace Slot_Machine_CSharp_UFV
                 }
             }
 
-            if (tresIguales)
+            if (tresIguales) // SOLO SI LOS 3 NUMEROS DE LA FILA CENTRAL SON IGUALES
             {
                 Console.WriteLine();
                 Console.WriteLine("  ╔══════════════════════════════╗");
@@ -200,37 +204,98 @@ namespace Slot_Machine_CSharp_UFV
         }
 
 
+        // BUSCAR PREMIO CORRESPONDIENTE A LA LINEA GANADORA
+        private Premio ObtenerPremioGanado(int numeroGanador)
+        {
+            // BUSCAR EN LA LISTA PREMIOS LOS SIMBOLOS CORRESPONDIENTES
+            foreach (var premio in premios)
+            {
+                if (premio.Simbolo1 == numeroGanador && premio.Simbolo2 == numeroGanador && premio.Simbolo3 == numeroGanador)
+                {
+                    return premio;
+                }
+            }
+            return null;
+        }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+        // MOSTRAMOS LOS PREMIOS DE LA LISTA PREMIOS (previamente cargados desde el CSV)
         private void MostrarPremios()
         {
-
+            Console.WriteLine();
+            Console.WriteLine(" Premios disponibles:");
+            foreach (var premio in premios)
+            {
+                Console.WriteLine($" - {premio.Nombre} (Símbolos: {premio.Simbolo1}, {premio.Simbolo2}, {premio.Simbolo3})");
+            }
+            Console.WriteLine(" Presiona cualquier tecla para volver al menú.");
+            Console.ReadKey();
         }
 
+
+        // CARGAR PREMIOS
         private void CargarPremios()
         {
+            try
+            {
+                Console.Write(" Introduce la ruta del archivo CSV: ");
+                string rutaArchivo = Console.ReadLine();
 
+                if (File.Exists(rutaArchivo))
+                {
+                    string[] lineas = File.ReadAllLines(rutaArchivo); 
+                    List<Premio> nuevosPremios = new List<Premio>(); // LISTA NUEVOS PREMIOS CARGADOS
+
+                    foreach (string linea in lineas)
+                    {
+                        try
+                        {
+                            string[] campos = linea.Split(';');        // SEPARADOR (;)
+
+                            int tipoPremio = int.Parse(campos[0]);     // CAMPO 0 = TIPO PREMIO (1 Simplre / 2 Aleatorio)
+                            string nombrePremio = campos[1];           // CAMPO 1 = NOMBRE PREMIO
+                            int simbolo1 = int.Parse(campos[2]);       // SIMBOLO 1 (primer numero de la matriz central)
+                            int simbolo2 = int.Parse(campos[3]);       // SIMBOLO 2 (segundo numero de la matriz central)
+                            int simbolo3 = int.Parse(campos[4]);       // SIMBOLO 3 (tercer numero de la matriz central)
+
+                            if (tipoPremio == 1)                       // PREMIO SIMPLE
+                            {
+                                string consejo = campos[5];           // CONSEJO ÚNICO
+                                PremioSimple premioSimple = new PremioSimple(nombrePremio, simbolo1, simbolo2, simbolo3, consejo);
+                                nuevosPremios.Add(premioSimple);
+                            }
+                            else if (tipoPremio == 2)                  // PREMIO ALEATORIO 
+                            {
+                                string consejo1 = campos[5];           // CONSEJO ALEATORIO 1
+                                string consejo2 = campos[6];           // CONSEJO ALEATORIO 2
+                                double probabilidad = double.Parse(campos[7]); // PROBABILIDAD DEL CONSEJO ALEATORIO 1
+
+                                PremioAleatorio premioAleatorio = new PremioAleatorio(nombrePremio, simbolo1, simbolo2, simbolo3, consejo1, consejo2, probabilidad);
+                                nuevosPremios.Add(premioAleatorio);
+                            }
+                        }
+                        catch (FormatException ex)
+                        {
+                            Console.WriteLine($" Error al cargar los premios: {ex.Message}");
+                        }
+                    }
+
+                    // REEMPLAZAR PREMIOS POR OTROS NUEVOS (desde la carga de archivos CSV)
+                    premios = nuevosPremios;
+                    Console.WriteLine(" Premios cargados correctamente.");
+                }
+                else
+                {
+                    Console.WriteLine(" El archivo no existe.");
+                }
+            }
+            catch (Exception ex) // CAPTURAMOS EXCEPCIONES
+            {
+                Console.WriteLine($" Error al cargar los premios: {ex.Message}");
+            }
+            Console.WriteLine(" Presiona cualquier tecla para volver al menú.");
+            Console.ReadKey();
         }
-
-
-
-
-
-
-
 
 
         // COMPROBAMOS SI LA CONTRASEÑA ESCRITA COINCIDE CON LA CLAVE ADMIN
@@ -250,4 +315,3 @@ namespace Slot_Machine_CSharp_UFV
         }
     }
 }
-
