@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,9 +10,9 @@ namespace Slot_Machine_CSharp_UFV
     {
         static void Main(string[] args)
         {
+            // LLAMAMOS AL MENU PRINCIPAL DESDE UNA INSTANCIA slotMachine
             SlotMachine slotMachine = new SlotMachine();
             slotMachine.MenuPrincipal();
-            Console.ReadKey();
         }
     }
 }
