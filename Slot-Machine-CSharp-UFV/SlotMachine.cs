@@ -9,8 +9,13 @@ namespace Slot_Machine_CSharp_UFV
 {
     internal class SlotMachine
     {
+        // LISTA PREMIOS CARGADOS
         private List<Premio> premios = new List<Premio>();
-        private const string claveAdmin = "admin123";
+
+        // CLAVE VALIDAR ADMIN
+        private const string claveAdmin = "a";
+
+        // LISTA FRASES MOTIVACIONALES
         private List<string> frasesMotivacionales = new List<string>
         {
             " ¡GIRA Y GANA UNA VIDA MEJOR!",
@@ -19,6 +24,8 @@ namespace Slot_Machine_CSharp_UFV
             " ¡EL JACKPOT ESTA CERCA!",
             " ¡LA SLOT MACHINE ESTA CALIENTE!"
         };
+        
+        // MENU DE INICIO
         public void MenuPrincipal()
         {
             while (true)
@@ -62,7 +69,7 @@ namespace Slot_Machine_CSharp_UFV
                             break;
                     }
                 }
-                catch (Exception ex)
+                catch (Exception ex) // CAPTURAMOS EXCEPCIONES
                 {
                     Console.WriteLine($" Se produjo un error: {ex.Message}");
                 }
@@ -73,14 +80,14 @@ namespace Slot_Machine_CSharp_UFV
         {
             try
             {
-                int[,] rodillos = new int[3, 3];
-                Random rand = new Random();
+                int[,] rodillos = new int[3, 3]; // GENERAMOS MATRIZ (3 filas, 3 columnas)
+                Random rand = new Random();      // CON NUMEROS ALEATORIOS
 
                 for (int i = 0; i < 3; i++)
                 {
                     for (int j = 0; j < 3; j++)
                     {
-                        rodillos[i, j] = rand.Next(0, 10);
+                        rodillos[i, j] = rand.Next(0, 10); // RANGO DE NUMEROS (0-9)
                     }
                 }
 
@@ -97,27 +104,27 @@ namespace Slot_Machine_CSharp_UFV
                     {
                         Console.Write($"    ║   {rodillos[i, j]}");
                     }
-                    Console.WriteLine("    ║");
+                    Console.WriteLine("    ║"); // CAMBIAR RENGLON
 
-                    if (i < 2)
+                    if (i < 2) // CUANDO HAY MENOS DE DOS FILAS
                     {
                         Console.WriteLine("    ╠════════╬════════╬════════╣");
                     }
-                    else
+                    else // CUANDO ACABAN LAS 3 FILAS
                     {
                         Console.WriteLine("    ╚════════╩════════╩════════╝");
                     }
                 }
 
-                VerificarLineaGanadora(rodillos);
+                VerificarLineaGanadora(rodillos); // VERIFICAMOS SI LA LÍNEA ES CORRECTA
 
                 Console.WriteLine();
-                Console.WriteLine("  ╔═══════════════════════╗");
-                Console.WriteLine("  ║   1. Jugar de nuevo   ║");
-                Console.WriteLine("  ║   2. Salir            ║");
-                Console.WriteLine("  ╚═══════════════════════╝");
+                Console.WriteLine("    ╔═══════════════════════╗");
+                Console.WriteLine("    ║   1. Jugar de nuevo   ║");
+                Console.WriteLine("    ║   2. Salir            ║");
+                Console.WriteLine("    ╚═══════════════════════╝");
                 Console.WriteLine();
-                Console.Write(" Elige una opción: ");
+                Console.Write("    Elige una opción: ");
                 int opcion = int.Parse(Console.ReadLine());
 
                 if (opcion == 1)
@@ -125,36 +132,72 @@ namespace Slot_Machine_CSharp_UFV
                     Jugar();
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex) // CAPTURAMOS EXCEPCIONES
             {
-                Console.WriteLine($" Se produjo un error durante el juego: {ex.Message}");
+                Console.WriteLine($"    Se produjo un error durante el juego: {ex.Message}");
             }
         }
+
+        
         private void VerificarLineaGanadora(int[,] rodillos)
         {
-            for (int i = 0; i < 3; i++)
+            Random rnd = new Random(); // CREAMOS LA INSTANCIA RANDOM 
+
+            int filaCentral = 1;
+            int primerNumero = rodillos[filaCentral, 0];
+            bool tresIguales = true;
+
+            for (int j = 1; j < 3; j++)
             {
-                int primerNumero = rodillos[i, 0];
-                bool tresIguales = true;
-
-                for (int j = 1; j < 3; j++)
+                if (rodillos[filaCentral, j] != primerNumero)
                 {
-                    if (rodillos[i, j] != primerNumero)
-                    {
-                        tresIguales = false;
-                        break;
-                    }
-                }
-
-                if (tresIguales)
-                {
-                    Console.WriteLine("¡Felicidades! ¡Has ganado!");
-                    return;
+                    tresIguales = false;
+                    break;
                 }
             }
-            Console.WriteLine("¡Inténtalo de nuevo! ¡Ya casi está!");
-        }
 
+            if (tresIguales)
+            {
+                Console.WriteLine();
+                Console.WriteLine("  ╔══════════════════════════════╗");
+                Console.WriteLine("  ║  ¡Felicidades! ¡Has ganado!  ║");
+                Console.WriteLine("  ╚══════════════════════════════╝");
+                Console.WriteLine($"  {frasesMotivacionales[rnd.Next(frasesMotivacionales.Count)]}");
+
+                // CONSEJOS
+                Premio premioGanado = ObtenerPremioGanado(primerNumero);
+                if (premioGanado != null)
+                {
+                    if (premioGanado is PremioSimple)
+                    {
+                        PremioSimple premioSimple = (PremioSimple)premioGanado;
+                        Console.WriteLine();
+                        Console.WriteLine($"   Consejo: {premioSimple.Consejo}");
+                    }
+                    else if (premioGanado is PremioAleatorio)
+                    {
+                        PremioAleatorio premioAleatorio = (PremioAleatorio)premioGanado;
+                        double randomValue = rnd.NextDouble();
+                        if (randomValue <= premioAleatorio.ProbabilidadConsejo1)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine($"   Consejo: {premioAleatorio.Consejo1}");
+                        }
+                        else
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine($"   Consejo: {premioAleatorio.Consejo2}");
+                        }
+                    }
+                }
+                return;
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("  ╔═══════════════════════════════════════╗");
+            Console.WriteLine("  ║  ¡Inténtalo de nuevo! ¡Ya casi está!  ║");
+            Console.WriteLine("  ╚═══════════════════════════════════════╝");
+        }
 
 
 
@@ -190,6 +233,7 @@ namespace Slot_Machine_CSharp_UFV
 
 
 
+        // COMPROBAMOS SI LA CONTRASEÑA ESCRITA COINCIDE CON LA CLAVE ADMIN
         private bool ValidarAdmin()
         {
             try
@@ -198,9 +242,9 @@ namespace Slot_Machine_CSharp_UFV
                 string clave = Console.ReadLine();
                 return clave == claveAdmin;
             }
-            catch (Exception ex)
+            catch (Exception ex) // CAPTURAMOS EXCEPCIONES
             {
-                Console.WriteLine($" Se produjo un error: {ex.Message}");
+                Console.WriteLine($" Error al validar la contraseña: {ex.Message}");
                 return false;
             }
         }
