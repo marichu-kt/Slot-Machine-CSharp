@@ -25,7 +25,7 @@ namespace Slot_Machine_CSharp_UFV
         // METODO OVERRIDE MUESTRA CONSEJOS ALEATORIOS (sobrescribe al metodo abstracto de la clase padre premio)
         public override void MostrarConsejo()
         {
-            // SEGUN LA PROBABILIDAD SALE EL CONSEJO
+            // SEGÚN LA PROBABILIDAD SALE EL CONSEJO
             Random rand = new Random();
             double randomConsejo = rand.NextDouble();
             if (randomConsejo <= ProbabilidadConsejo1)
