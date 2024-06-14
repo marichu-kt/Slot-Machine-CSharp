@@ -43,15 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GestorDinero.cs" />
-    <Compile Include="InterfazUsuario.cs" />
     <Compile Include="Premio.cs" />
     <Compile Include="PremioAleatorio.cs" />
     <Compile Include="PremioSimple.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SlotMachine.cs" />
-    <Compile Include="Usuario.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
