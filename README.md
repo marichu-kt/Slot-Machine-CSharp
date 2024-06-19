@@ -74,7 +74,7 @@ tipo_premio: especifica la categoría del premio: 1 para premios simples; y 2 pa
 - consejo_2: indica el segundo consejo potencial para los premios aleatorios.
 - probabilidad: indica la probabilidad de que se muestre el primer consejo cuando se gana un premio. Por tanto, la probabilidad para el segundo consejo se establece automáticamente como 1 - probabilidad.
 
-Para facilitar el trabajo, hay un archivo CSV de muestra en este enlace [<span style="color: blue;">Descargar archivo</span>](https://github.com/marichu-kt/Slot-Machine-CSharp-UFV/raw/master/CSV/example_slot_machine.csv). Este archivo sirve de guía para desarrollar el proceso de carga de premios, garantizando una comprensión y aplicación de la funcionalidad de la máquina tragaperras.
+Para facilitar el trabajo, hay un archivo CSV de muestra en este enlace [<span style="color: blue;">Descargar archivo</span>](https://github.com/marichu-kt/Slot-Machine-CSharp-UFV/raw/master/CSV/slot_machine_products.csv). Este archivo sirve de guía para desarrollar el proceso de carga de premios, garantizando una comprensión y aplicación de la funcionalidad de la máquina tragaperras.
 
 ## CONSIDERACIONES DE DESAROLLO
 
