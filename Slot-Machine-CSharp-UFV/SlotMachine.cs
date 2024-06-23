@@ -13,7 +13,7 @@ namespace Slot_Machine_CSharp_UFV
         private List<Premio> premios = new List<Premio>();
 
         // CLAVE VALIDAR ADMIN
-        private const string claveAdmin = "a";
+        private const string claveAdmin = "admin";
 
         // LISTA FRASES MOTIVACIONALES
         private List<string> frasesMotivacionales = new List<string>
@@ -222,12 +222,54 @@ namespace Slot_Machine_CSharp_UFV
         // MOSTRAMOS LOS PREMIOS DE LA LISTA PREMIOS (previamente cargados desde el CSV)
         private void MostrarPremios()
         {
-            Console.WriteLine();
-            Console.WriteLine(" Premios disponibles:");
-            foreach (var premio in premios)
+            Console.Clear();
+            Console.WriteLine(" $ --- PREMIOS DISPONIBLES --- $");
+
+            for (int i = 0; i < premios.Count; i++)
             {
-                Console.WriteLine($" - {premio.Nombre} (Símbolos: {premio.Simbolo1}, {premio.Simbolo2}, {premio.Simbolo3})");
+                var premio = premios[i];
+                Console.WriteLine($"  {i + 1}. {premio.Nombre}");
             }
+
+            Console.WriteLine();
+            Console.Write(" Introduce el número del premio para más detalles: ");
+            string input = Console.ReadLine();
+
+            try
+            {
+                int indice = Convert.ToInt32(input);
+
+                if (indice > 0 && indice <= premios.Count)
+                {
+                    var premioSeleccionado = premios[indice - 1];
+                    Console.Clear();
+                    Console.WriteLine(" $ --- PREMIO SELECCIONADO --- $");
+                    Console.WriteLine($" Nombre: {premioSeleccionado.Nombre}");
+                    Console.WriteLine($" Símbolos: [{premioSeleccionado.Simbolo1}|{premioSeleccionado.Simbolo2}|{premioSeleccionado.Simbolo3}]");
+
+                    if (premioSeleccionado is PremioSimple)
+                    {
+                        var premioSimple = (PremioSimple)premioSeleccionado;
+                        Console.WriteLine($" Consejo: {premioSimple.Consejo}");
+                    }
+                    else if (premioSeleccionado is PremioAleatorio)
+                    {
+                        var premioAleatorio = (PremioAleatorio)premioSeleccionado;
+                        Console.WriteLine($" Consejo 1: {premioAleatorio.Consejo1}");
+                        Console.WriteLine($" Consejo 2: {premioAleatorio.Consejo2}");
+                        Console.WriteLine($" Probabilidad del Consejo 1: {premioAleatorio.ProbabilidadConsejo1 * 10}%");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine(" Número de premio no válido.");
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine(" Entrada no válida. Introduce un número válido.");
+            }
+            Console.WriteLine();
             Console.WriteLine(" Presiona cualquier tecla para volver al menú.");
             Console.ReadKey();
         }
