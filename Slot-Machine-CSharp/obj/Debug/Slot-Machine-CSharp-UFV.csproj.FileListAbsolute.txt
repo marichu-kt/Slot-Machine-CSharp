@@ -1,0 +1,7 @@
+C:\Users\Mario\OneDrive\Escritorio\Slot-Machine-CSharp-master\Slot-Machine-CSharp-UFV\bin\Debug\Slot-Machine-CSharp-UFV.exe.config
+C:\Users\Mario\OneDrive\Escritorio\Slot-Machine-CSharp-master\Slot-Machine-CSharp-UFV\bin\Debug\Slot-Machine-CSharp-UFV.exe
+C:\Users\Mario\OneDrive\Escritorio\Slot-Machine-CSharp-master\Slot-Machine-CSharp-UFV\bin\Debug\Slot-Machine-CSharp-UFV.pdb
+C:\Users\Mario\OneDrive\Escritorio\Slot-Machine-CSharp-master\Slot-Machine-CSharp-UFV\obj\Debug\Slot-Machine-CSharp-UFV.csproj.AssemblyReference.cache
+C:\Users\Mario\OneDrive\Escritorio\Slot-Machine-CSharp-master\Slot-Machine-CSharp-UFV\obj\Debug\Slot-Machine-CSharp-UFV.csproj.CoreCompileInputs.cache
+C:\Users\Mario\OneDrive\Escritorio\Slot-Machine-CSharp-master\Slot-Machine-CSharp-UFV\obj\Debug\Slot-Machine-CSharp-UFV.exe
+C:\Users\Mario\OneDrive\Escritorio\Slot-Machine-CSharp-master\Slot-Machine-CSharp-UFV\obj\Debug\Slot-Machine-CSharp-UFV.pdb
